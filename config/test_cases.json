@@ -1,0 +1,37 @@
+[
+  {
+    "id": "TC01",
+    "type": "direct_query",
+    "question": "Chào bạn, bạn có thể giới thiệu chung về dịch vụ xe bus điện thông minh VinBus và chính sách các loại vé đang áp dụng không?",
+    "expected_behavior": "Chatbot trả lời trực tiếp từ System Prompt/kiến thức cơ sở về VinBus, không cần gọi bất kỳ Tool nào.",
+    "complexity": "Low"
+  },
+  {
+    "id": "TC02",
+    "type": "single_tool_query",
+    "question": "Hãy tra cứu lộ trình và thời gian hoạt động của tuyến xe bus điện VinBus tuyến E01.",
+    "expected_behavior": "Agent nhận diện nhu cầu tra cứu lộ trình, tự động phát sinh Tool Call tra cứu thông tin tuyến xe với mã tuyến 'E01'.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC03",
+    "type": "appointment_booking",
+    "question": "Tôi muốn đăng ký vé tháng tuyến xe bus điện E01 cho hành khách Nguyễn Văn An (SĐT: 0912345678, đối tượng: Sinh viên) áp dụng từ ngày 01/10/2026.",
+    "expected_behavior": "Agent tự động phát sinh Tool Call đăng ký/đặt lịch làm vé tháng với đúng thông tin tuyến xe, khách hàng và ngày áp dụng.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC04",
+    "type": "multi_step_reasoning",
+    "question": "Tôi cần di chuyển từ Vinhomes Smart City đến Công viên nước Hồ Tây, hãy tra cứu xem có tuyến xe VinBus nào đi qua không và sau đó tiến hành đăng ký vé tháng tuyến xe đó cho tôi luôn nhé (Tên: Trần Thị Bình, SĐT: 0987654321, từ ngày 01/10/2026).",
+    "expected_behavior": "Agent thực hiện chuỗi suy luận ReAct đa bước: Tra cứu lộ trình tuyến xe bus điện phù hợp trước (tuyến E09), sau đó sử dụng thông tin thu được để thực hiện đăng ký vé tháng.",
+    "complexity": "High"
+  },
+  {
+    "id": "TC05",
+    "type": "edge_case_handling",
+    "question": "Hãy tra cứu thông tin lộ trình và các điểm đón của tuyến xe bus điện VinBus có mã tuyến E999.",
+    "expected_behavior": "Agent nhận kết quả NOT_FOUND từ Tool do mã tuyến xe không tồn tại và đưa ra phản hồi lịch sự, chính xác, không bịa đặt dữ liệu.",
+    "complexity": "Medium"
+  }
+]

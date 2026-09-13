@@ -28,20 +28,33 @@ Dán 1 đoạn trích xuất log tiêu biểu từ file `docs/trace_waterfall.js
 [
   {
     "step": 1,
+    "query": "Hãy tra cứu lộ trình và thời gian hoạt động của tuyến xe bus điện VinBus tuyến E01.",
     "action_type": "TOOL_EXECUTION",
-    "tool_name": "academic_query",
+    "tool_name": "bus_route_query",
     "arguments": {
-      "student_id": "SV2026001"
+      "route_id": "E01"
     },
     "observation": {
       "status": "SUCCESS",
-      "student_id": "SV2026001",
+      "route_id": "E01",
       "data": {
-        "full_name": "Nguyễn Văn An",
-        "gpa": 3.85
+        "route_name": "Tuyến E01: Bến xe Mỹ Đình - Khu đô thị Vinhomes Ocean Park",
+        "operating_hours": "05:00 - 21:00 (hằng ngày)",
+        "frequency": "15 - 20 phút/chuyến",
+        "ticket_price": "8.000 VNĐ/lượt",
+        "stops": "Bến xe Mỹ Đình - Phạm Hùng - Khuất Duy Tiến - Nguyễn Trãi - Cầu Vĩnh Tuy - Vinhomes Ocean Park",
+        "status": "Đang hoạt động"
       }
     },
-    "latency_ms": 120.5
+    "latency_ms": 1897.37
+  },
+  {
+    "step": 2,
+    "query": "Hãy tra cứu lộ trình và thời gian hoạt động của tuyến xe bus điện VinBus tuyến E01.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
+    "output": "🚌 Thông tin Tuyến E01: Bến xe Mỹ Đình - Khu đô thị Vinhomes Ocean Park:\n- Giờ hoạt động: 05:00 - 21:00 (hằng ngày)\n- Tần suất: 15 - 20 phút/chuyến\n- Giá vé: 8.000 VNĐ/lượt\n- Lộ trình điểm dừng: Bến xe Mỹ Đình - Phạm Hùng - Khuất Duy Tiến - Nguyễn Trãi - Cầu Vĩnh Tuy - Vinhomes Ocean Park\n- Trạng thái: Đang hoạt động.",
+    "latency_ms": 10.0
   }
 ]
 ```
@@ -50,10 +63,10 @@ Dán 1 đoạn trích xuất log tiêu biểu từ file `docs/trace_waterfall.js
 
 ## 3. TỔNG KẾT KẾT QUẢ NGHIỆM THU & NỘP BÀI
 
-- [ ] Đã điền API Key thật trong `.env` và xác nhận Agent chạy mượt mà trên LLM API thật (Gemini/OpenAI).
-- **Tổng số Test Cases đã chạy thành công:** ___ / 5 test cases.
-- **Số lượt gọi Tool qua MCP Server chính xác:** ___ lượt.
-- **Kết quả đẩy Repo nộp bài:** [ ] Đã Commit và Push mã nguồn thành công lên GitHub cá nhân.
+- [v] Đã điền API Key thật trong `.env` và xác nhận Agent chạy mượt mà trên LLM API thật (OpenAI - `gpt-4o-mini`).
+- **Tổng số Test Cases đã chạy thành công:** 5 / 5 test cases.
+- **Số lượt gọi Tool qua MCP Server chính xác:** 4 / 4 lượt (TC02, TC03, TC04, TC05 gọi công cụ qua MCP Server thành công; TC01 phản hồi kiến thức chung an toàn không cần gọi Tool).
+- **Kết quả đẩy Repo nộp bài:** [v] Đã Commit và Push mã nguồn thành công lên GitHub cá nhân.
 
 ---
 

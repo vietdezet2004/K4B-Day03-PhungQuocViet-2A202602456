@@ -119,19 +119,29 @@ def run_react_agent(user_query: str, provider, mcp_server: MCPAcademicServer) ->
                 
                 # Tổng hợp Final Answer từ kết quả Observation thực tế
                 if obs_data.get("status") == "SUCCESS":
-                    if "data" in obs_data:
-                        d = obs_data["data"]
-                        final_answer = (
-                            f"Kết quả tra cứu cho sinh viên {obs_data.get('student_id', '')} ({d.get('full_name', '')}): "
-                            f"Lớp {d.get('class', '')}, GPA: {d.get('gpa', '')}, Email: {d.get('email', '')}, "
-                            f"Trạng thái: {d.get('status', '')}, Cố vấn: {d.get('advisor', '')}."
-                        )
-                    elif "message" in obs_data:
+                    if "message" in obs_data:
                         final_answer = obs_data["message"]
+                    elif "data" in obs_data:
+                        d = obs_data["data"]
+                        if "route_name" in d:
+                            final_answer = (
+                                f"🚌 Thông tin {d.get('route_name')}:\n"
+                                f"- Giờ hoạt động: {d.get('operating_hours')}\n"
+                                f"- Tần suất: {d.get('frequency')}\n"
+                                f"- Giá vé: {d.get('ticket_price')}\n"
+                                f"- Lộ trình điểm dừng: {d.get('stops')}\n"
+                                f"- Trạng thái: {d.get('status')}."
+                            )
+                        else:
+                            final_answer = (
+                                f"Kết quả tra cứu cho sinh viên {obs_data.get('student_id', '')} ({d.get('full_name', '')}): "
+                                f"Lớp {d.get('class', '')}, GPA: {d.get('gpa', '')}, Email: {d.get('email', '')}, "
+                                f"Trạng thái: {d.get('status', '')}, Cố vấn: {d.get('advisor', '')}."
+                            )
                     else:
                         final_answer = f"Đã hoàn tất xử lý qua MCP Server: {json.dumps(obs_data, ensure_ascii=False)}"
                 elif obs_data.get("status") == "NOT_FOUND":
-                    final_answer = obs_data.get("message", "Không tìm thấy thông tin sinh viên yêu cầu.")
+                    final_answer = obs_data.get("message", "Không tìm thấy dữ liệu theo yêu cầu.")
                 else:
                     final_answer = f"Phản hồi từ công cụ: {json.dumps(obs_data, ensure_ascii=False)}"
             
@@ -164,7 +174,7 @@ def run_react_agent(user_query: str, provider, mcp_server: MCPAcademicServer) ->
 
 if __name__ == "__main__":
     print("==========================================================")
-    print("🏫 VINUNI AI COURSE - DAY 03 LAB: CHATBOT VS REACT AGENT")
+    print("🚌 VINBUS AI ASSISTANT - DAY 03 LAB: CHATBOT VS REACT AGENT")
     print("==========================================================")
     
     provider = get_llm_provider()
